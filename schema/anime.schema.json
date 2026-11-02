@@ -1,0 +1,226 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Orbit Anime DB — Eintrag (v0)",
+  "description": "Ein Anime-Werk (TV, Film, OVA, ONA, Special). Manga/Games/Sonstiges gehören NICHT hierher.",
+  "type": "object",
+  "required": [
+    "id",
+    "type",
+    "title",
+    "status",
+    "ids",
+    "sources"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Eigene stabile ID, z. B. oadb:wd:Q138897981"
+    },
+    "type": {
+      "enum": [
+        "tv",
+        "movie",
+        "ova",
+        "ona",
+        "special",
+        "unknown"
+      ]
+    },
+    "title": {
+      "type": "object",
+      "properties": {
+        "en": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "ja": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "romaji": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "synonyms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "status": {
+      "enum": [
+        "announced",
+        "upcoming",
+        "airing",
+        "finished",
+        "unknown"
+      ]
+    },
+    "start_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "ISO 8601 (Jahr, Monat oder Tag), wie bekannt"
+    },
+    "end_date": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "episodes": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "studios": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "genres": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "website": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "synopsis": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "license": {
+          "type": "string"
+        },
+        "generated": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ids": {
+      "type": "object",
+      "description": "Verweise auf andere Datenbanken (nur IDs, keine fremden Inhalte)",
+      "properties": {
+        "wikidata": {
+          "type": "string"
+        },
+        "anilist": {
+          "type": "integer"
+        },
+        "mal": {
+          "type": "integer"
+        },
+        "ann": {
+          "type": "integer"
+        },
+        "anidb": {
+          "type": "integer"
+        },
+        "tmdb_tv": {
+          "type": "integer"
+        },
+        "imdb": {
+          "type": "string"
+        },
+        "kitsu": {
+          "type": "integer"
+        },
+        "anisearch": {
+          "type": "integer"
+        },
+        "wikipedia_en": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "retrieved"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "retrieved": {
+            "type": "string"
+          },
+          "license": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "updated_at": {
+      "type": "string"
+    },
+    "season": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "season": {
+          "enum": [
+            "winter",
+            "spring",
+            "summer",
+            "fall",
+            null
+          ]
+        },
+        "year": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      }
+    },
+    "field_sources": {
+      "type": "object",
+      "description": "Herkunft einzelner Felder (feld → Quelle), damit Exporte nach Lizenz filtern können",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "layers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Aus welchen Schichten der Eintrag stammt: wikidata, ann, manami"
+    }
+  }
+}
