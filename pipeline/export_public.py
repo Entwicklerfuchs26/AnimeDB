@@ -30,7 +30,7 @@ def main() -> None:
                     r[fld] = [] if fld in ("studios", "genres") else None
                     fs.pop(fld, None)
             r["field_sources"] = fs
-            keep_src = [s for s in r["sources"] if (s["name"] == "Wikidata") or (s["name"] == "Wikipedia")
+            keep_src = [s for s in r["sources"] if (s["name"] == "Wikidata") or (s["name"] == "Wikipedia") or (s["name"] == "MyDubList")
                         or (s["name"] == "anime-offline-database" and allow_mn)]
             r["sources"] = [s for s in keep_src if s["name"] != "anime-offline-database" or allow_mn]
             r["layers"] = [l for l in r["layers"] if l == "wikidata" or (l == "manami" and allow_mn)] or ["wikidata"]

@@ -221,6 +221,36 @@
         "type": "string"
       },
       "description": "Aus welchen Schichten der Eintrag stammt: wikidata, ann, manami"
+    },
+    "dubs": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "Synchronisationen (MyDubList, CC BY 4.0): Sprache → beste Konfidenzstufe",
+      "properties": {
+        "languages": {
+          "type": "object",
+          "propertyNames": {
+            "pattern": "^[a-z]+$"
+          },
+          "additionalProperties": {
+            "enum": [
+              "very-high",
+              "high",
+              "normal",
+              "low"
+            ]
+          }
+        },
+        "source": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "languages",
+        "source"
+      ]
     }
   }
 }

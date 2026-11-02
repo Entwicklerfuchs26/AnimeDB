@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Tageslauf: alles neu zusammenbauen → data/anime.jsonl (die veröffentlichte Fassung).
-# Quellen: Wikidata (live), anime-offline-database (archivierter Stand in sources/), Wikipedia (Einleitungstexte).
+# Quellen: Wikidata (live), anime-offline-database (archivierter Stand in sources/), Wikipedia (Einleitungstexte), MyDubList (Synchro-Angaben).
 # OADB_CONTACT (E-Mail oder URL) gehört in den User-Agent; Standard: dieses Repository.
 set -euo pipefail
 cd "$(dirname "$0")"
@@ -13,5 +13,6 @@ $PY pipeline/wikidata_new.py all data/wikidata_all.jsonl
 $PY pipeline/manami_import.py "$MANAMI" data/manami.jsonl
 $PY pipeline/merge.py data/merged.jsonl data/wikidata_all.jsonl data/manami.jsonl
 $PY pipeline/wikipedia_synopsis.py data/merged.jsonl data/syn.jsonl
-$PY pipeline/export_public.py data/syn.jsonl data/anime.jsonl --allow-manami
+$PY pipeline/mydublist.py data/syn.jsonl data/syn_dub.jsonl
+$PY pipeline/export_public.py data/syn_dub.jsonl data/anime.jsonl --allow-manami
 $PY pipeline/validate.py data/anime.jsonl

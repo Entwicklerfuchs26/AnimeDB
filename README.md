@@ -13,15 +13,16 @@ Abdeckung variiert je Feld; Synopsen gibt es nur für Titel mit Wikipedia-Artike
 
 ## Format
 `schema/anime.schema.json` — Titel (en/ja/Synonyme), Typ, Status (aus Datum abgeleitet), Start/Ende, Saison, Episoden, Studios, Genres, Webseite,
-`synopsis` (Text + Quelle + Lizenz + `generated`), `ids` (Verweise auf Wikidata, AniList, MAL, AniDB, Kitsu … **nur IDs**), `sources`, `layers`, `field_sources`.
+`synopsis` (Text + Quelle + Lizenz + `generated`), `ids` (Verweise auf Wikidata, AniList, MAL, AniDB, Kitsu … **nur IDs**), `dubs` (Sprache → Konfidenzstufe, Quelle MyDubList), `sources`, `layers`, `field_sources`.
 
 ## Pipeline (`./update.sh`, optional `OADB_CONTACT` = E-Mail/URL für den User-Agent)
 1. `wikidata_new.py all` — alle Anime aus Wikidata (CC0)
 2. `manami_import.py` — ältere Titel aus der archivierten anime-offline-database (`sources/`)
 3. `merge.py` — Dubletten über Cross-IDs, Rückfall Titel+Jahr+Typ nur wenn eindeutig
 4. `wikipedia_synopsis.py` — Kurzbeschreibung aus Wikipedia-Intro (mit Cache)
-5. `export_public.py` — Ausgabe `data/anime.jsonl`
-6. `validate.py` — Schema + Regeln
+5. `mydublist.py` — Synchro-Angaben (Feld `dubs`) aus MyDubList, zugeordnet über MAL-/AniList-ID
+6. `export_public.py` — Ausgabe `data/anime.jsonl`
+7. `validate.py` — Schema + Regeln
 
 ## Rechtliches
 - Lizenz und Quellen: `LICENSE`, `NOTICE.md`. **Entfernung auf Anfrage** per Issue.
